@@ -1,0 +1,62 @@
+{
+  "posts": [
+    {
+      "id": "fH5kYeuNg",
+      "category": "교통",
+      "writer": "ㄴㅇㄹ",
+      "title": "ㄴㄹ",
+      "contents": "ㄹㄹ"
+    },
+    {
+      "id": "uyQMf9FFF",
+      "category": "쇼핑",
+      "writer": "ㅎㄴㅇㅎ",
+      "title": "ㄴㅇㄹ",
+      "contents": "ㅎㅎㅎ"
+    }
+  ],
+  "comments": [
+    {
+      "id": "QZ9frh7IB",
+      "postId": "fH5kYeuNg",
+      "writer": "sdf",
+      "contents": "dsfsfdsf"
+    },
+    {
+      "id": "Lmvxl5e7W",
+      "postId": "fH5kYeuNg",
+      "writer": "dfgdfg",
+      "contents": "dfgf"
+    },
+    {
+      "id": "sJpJcQEa4",
+      "postId": "fH5kYeuNg",
+      "writer": "sdf",
+      "contents": "dsfsfdsf"
+    },
+    {
+      "id": "l8RVrIPx5",
+      "postId": "fH5kYeuNg",
+      "writer": "1111",
+      "contents": "dsfs2222"
+    },
+    {
+      "id": "ZfHUNHqQf",
+      "postId": "uyQMf9FFF",
+      "writer": "11fffg",
+      "contents": "11fffgg"
+    },
+    {
+      "id": "n1Vo7hap_",
+      "postId": "uyQMf9FFF",
+      "writer": "33",
+      "contents": "33"
+    },
+    {
+      "id": "mVSGc0dUQ",
+      "postId": "uyQMf9FFF",
+      "writer": "gg11",
+      "contents": "ggg11"
+    }
+  ]
+}
