@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import useInput from "../../hooks/useInput";
 import Category from "../category/Category";
 import { styled } from "styled-components";
+import Button from "../button/Button";
 
 const Input = ({ country, clickOpenModal }) => {
   const [category, onChangeCategory] = useInput();
@@ -26,8 +27,8 @@ const Input = ({ country, clickOpenModal }) => {
 
     if (!category) {
       return alert("카테고리를 선택해 주세요.");
+    } else {
     }
-
     const newPost = {
       id: shortid.generate(),
       country,
@@ -39,42 +40,56 @@ const Input = ({ country, clickOpenModal }) => {
 
     mutation.mutate(newPost);
 
+    clickOpenModal();
+
     resetWriter("");
     resetTitle("");
     resetContents("");
+
+    return alert("글이 등록되었습니다.");
   };
 
   return (
-    <div>
-      <ModalContainer>
-        <ModalWrapper onSubmit={onSubmitAddPostHandler}>
-          Category : <Category onChangeCategory={onChangeCategory} />
-          Writer :
-          <input
-            value={writer}
-            onChange={(e) => onChangeWriter(e.target.value)}
-            placeholder="작성자 입력 ..."
-            required
-          />
-          제목 :
-          <input
-            value={title}
-            onChange={(e) => onChangeTitle(e.target.value)}
-            placeholder="제목 입력 ..."
-            required
-          />
-          내용 :
-          <input
-            value={contents}
-            onChange={(e) => onChangeContents(e.target.value)}
-            placeholder="내용 입력 ..."
-            required
-          />
-          <button type="submit">등록</button>
-          <button onClick={clickOpenModal}>닫기</button>
-        </ModalWrapper>
-      </ModalContainer>
-    </div>
+    <ModalContainer>
+      <ModalWrapper>
+        <ModalBox onSubmit={onSubmitAddPostHandler}>
+          <div>
+            Category : <Category onChangeCategory={onChangeCategory} />
+          </div>
+          <div>
+            Writer :
+            <textarea
+              value={writer}
+              onChange={(e) => onChangeWriter(e.target.value)}
+              placeholder="작성자 입력 ..."
+              required
+            />
+          </div>
+          <div>
+            Title :
+            <textarea
+              value={title}
+              onChange={(e) => onChangeTitle(e.target.value)}
+              placeholder="제목 입력 ..."
+              required
+            />
+          </div>
+          <div>
+            Contents :
+            <textarea
+              value={contents}
+              onChange={(e) => onChangeContents(e.target.value)}
+              placeholder="내용 입력 ..."
+              required
+            />
+          </div>
+          <ModalBtnBox>
+            <Button type="submit">등록</Button>
+            <Button onClickEvent={clickOpenModal}>닫기</Button>
+          </ModalBtnBox>
+        </ModalBox>
+      </ModalWrapper>
+    </ModalContainer>
   );
 };
 
@@ -90,19 +105,43 @@ const ModalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 `;
 
-const ModalWrapper = styled.form`
+const ModalWrapper = styled.div`
   width: 600px;
   height: 400px;
+  /* 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; */
+
+  /* text-align: left; */
+
+  color: #000000;
+  font-size: 18px;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+`;
+
+const ModalBox = styled.form`
+  /* width: 600px;
+  height: 400px; */
 
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  color: #000000;
-  font-size: 20px;
+  /* text-align: left; */
+
+  /* color: #000000;
+  font-size: 18px;
   background-color: #e7e7e7;
-  border-radius: 10px;
+  border-radius: 10px; */
+`;
+
+const ModalBtnBox = styled.div`
+  margin: 20px 0;
 `;

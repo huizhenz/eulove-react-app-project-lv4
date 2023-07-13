@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { deletePost, getCountryPosts, getPosts } from "../../axios/api";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getPosts } from "../../axios/api";
+import { useNavigate, useParams } from "react-router-dom";
 import Input from "../input/Input";
 import useInput from "../../hooks/useInput";
 import { styled } from "styled-components";
@@ -11,22 +11,13 @@ import { PiHouseLineBold } from "react-icons/pi";
 import { PiForkKnifeDuotone } from "react-icons/pi";
 import { TbShoppingBag } from "react-icons/tb";
 import { LiaLandmarkSolid } from "react-icons/lia";
+import Button from "../button/Button";
 
 const List = ({ country, img }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { isLoading, isError, data } = useQuery("posts", getPosts);
-
-  const queryClient = useQueryClient();
-  // useMutation 훅을 사용한다면 요청 관련 상태의 관리와 요청 처리 전/후로 실행할 작업을 쉽게 설정
-  const mutation = useMutation(deletePost, {
-    // onSuccess는 useMutation의 option 중 하나
-    onSuccess: () => {
-      queryClient.invalidateQueries("posts");
-      console.log("삭제 성공");
-    },
-  });
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   // const []
@@ -55,15 +46,6 @@ const List = ({ country, img }) => {
         : filteredCountry
       : filteredCountry || [];
 
-  const clickDeletePost = (id) => {
-    if (window.confirm("정말 삭제하시겠습니까 ?")) {
-      alert("삭제되었습니다.");
-      mutation.mutate(id);
-    } else {
-      alert("삭제가 취소되었습니다.");
-    }
-  };
-
   const clickToDetail = (id) => navigate(`/detail/${id}`);
 
   if (isLoading) {
@@ -77,42 +59,35 @@ const List = ({ country, img }) => {
   return (
     <ListContainer>
       <ListTitle img={img}>{country}</ListTitle>
+      <button onClick={clickOpenModal}>글쓰기</button>
+      {isOpenModal && (
+        <Input country={country} clickOpenModal={clickOpenModal} />
+      )}
+      <ListCategory>
+        {categories.map((option) => {
+          return (
+            <CategoryIcon
+              key={option}
+              onClick={() => onChangeSelectedCategory(option.category)}
+            >
+              {option.icon}
+            </CategoryIcon>
+          );
+        })}
+      </ListCategory>
       <ListWrapper>
-        <button onClick={clickOpenModal}>글쓰기</button>
-        <ListCategory>
-          {isOpenModal && (
-            <Input country={country} clickOpenModal={clickOpenModal} />
-          )}
-          <br />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {categories.map((option) => {
-              return (
-                <div
-                  style={{ padding: "30px" }}
-                  key={option}
-                  onClick={() => onChangeSelectedCategory(option.category)}
-                >
-                  {option.icon}
-                </div>
-              );
-            })}
-          </div>
-        </ListCategory>
         {filteredList.map((post) => {
           return (
             <ListBox key={post.id}>
-              <p>{post.category}</p>
-              <p>{post.writer}</p>
-              <p>{post.title}</p>
-              <p>{post.contents}</p>
-              <button onClick={() => clickDeletePost(post.id)}>삭제</button>
-              <button onClick={() => clickToDetail(post.id)}>상세</button>
+              <PostCategory>{post.category}</PostCategory>
+              <PostTitle>{post.title}</PostTitle>
+              <PostContents>{post.contents}</PostContents>
+              <PostContents>by. {post.writer}</PostContents>
+              <PostBtn>
+                <Button onClickEvent={() => clickToDetail(post.id)}>
+                  상세
+                </Button>
+              </PostBtn>
             </ListBox>
           );
         })}
@@ -124,8 +99,8 @@ const List = ({ country, img }) => {
 export default List;
 
 const ListContainer = styled.div`
-  width: 100%;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ListTitle = styled.div`
@@ -145,28 +120,62 @@ const ListTitle = styled.div`
 `;
 
 const ListCategory = styled.div`
-  /* margin: 40px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #cecece;
+  margin: 40px 0px;
 `;
 
-const ListCategoryButton = styled.button`
-  margin: 30px;
+const CategoryIcon = styled.div`
+  padding: 40px 30px;
   cursor: pointer;
 `;
 
 const ListWrapper = styled.div`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ListBox = styled.div`
-  height: 120px;
-  /* width: 1000px; */
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #000000;
+  position: relative;
+  width: 85%;
+  color: black;
   background-color: #e7e7e7;
-  /* border-radius: 5px; */
-  margin-top: 40px;
+  border-radius: 5px;
+  padding: 20px 25px;
+  margin: 30px 0;
+`;
+
+const PostCategory = styled.div`
+  width: 60px;
+  text-align: center;
+  border: 3px solid #383838;
+  border-radius: 10px;
+  font-size: 20px;
+  margin: 3px;
+`;
+
+const PostTitle = styled.div`
+  font-size: 24px;
+  font-weight: 600;
+  margin: 10px 5px;
+`;
+
+const PostContents = styled.div`
+  font-size: 18px;
+  margin: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+const PostBtn = styled.div`
+  position: absolute;
+  bottom: 40%;
+  right: 2%;
 `;

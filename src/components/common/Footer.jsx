@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 const Footer = () => {
   return (
     <FooterBox>
-      <FooterContent>creator : 나ㅇㅂ, 장혜진, 조ㅅㄹ </FooterContent>
+      <FooterContent>creator : 장혜진 </FooterContent>
     </FooterBox>
   );
 };
@@ -12,7 +12,7 @@ const Footer = () => {
 export default Footer;
 
 const FooterBox = styled.div`
-  border-top: 1px solid #ffffff;
+  border-top: 1px solid #cecece;
   margin-top: 100px;
 `;
 

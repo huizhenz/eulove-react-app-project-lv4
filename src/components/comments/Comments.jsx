@@ -10,6 +10,7 @@ import useInput from "../../hooks/useInput";
 import shortid from "shortid";
 import { useParams } from "react-router-dom";
 import Button from "../button/Button";
+import { styled } from "styled-components";
 
 const Comments = () => {
   const params = useParams();
@@ -101,51 +102,19 @@ const Comments = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={submitAddComment}>
-        댓글 작성자 :
-        <input
-          value={writer}
-          onChange={(e) => onChangeWriter(e.target.value)}
-          required
-        />
-        댓글 내용 :
-        <input
-          value={comment}
-          onChange={(e) => onChangeComment(e.target.value)}
-          required
-        />
-        <Button type="submit">추가</Button>
-      </form>
-      <div
-        style={{ border: "1px solid black", padding: "10px", margin: "10px" }}
-      >
+    <CommentsContainer>
+      <CommentsTitle>Comments</CommentsTitle>
+      <CommentsWrapper>
         {data
           .filter((comment) => comment.postId === params.id)
           .map((comment) => {
             const isEditMode = editedId === comment.id;
             return (
-              <div
-                key={comment.id}
-                style={{
-                  border: "1px solid black",
-                  padding: "10px",
-                  margin: "10px",
-                }}
-              >
+              <CommentsBox key={comment.id}>
                 <div>
-                  작성자 수정 :
-                  {isEditMode ? (
-                    <textarea
-                      value={editedWriter}
-                      onChange={(e) => onChangeEditedWriter(e.target.value)}
-                    />
-                  ) : (
-                    <span>{comment.writer}</span>
-                  )}
+                  <span> by. {comment.writer}</span>
                 </div>
-                <div>
-                  댓글 수정 :
+                <CommentsContents>
                   {isEditMode ? (
                     <textarea
                       value={editedContents}
@@ -154,25 +123,88 @@ const Comments = () => {
                   ) : (
                     <span>{comment.contents}</span>
                   )}
-                </div>
-                {isEditMode ? (
-                  <Button onClickEvent={() => clickUpdateComment(comment)}>
-                    저장
+                </CommentsContents>
+                <CommentsBtnBox>
+                  {isEditMode ? (
+                    <Button onClickEvent={() => clickUpdateComment(comment)}>
+                      저장
+                    </Button>
+                  ) : (
+                    <Button onClickEvent={() => clickEditComment(comment)}>
+                      수정
+                    </Button>
+                  )}
+                  <Button onClickEvent={() => clickDeleteComment(comment.id)}>
+                    삭제
                   </Button>
-                ) : (
-                  <Button onClickEvent={() => clickEditComment(comment)}>
-                    수정
-                  </Button>
-                )}
-                <Button onClickEvent={() => clickDeleteComment(comment.id)}>
-                  삭제
-                </Button>
-              </div>
+                </CommentsBtnBox>
+              </CommentsBox>
             );
           })}
-      </div>
-    </div>
+        <CommentsEdit onSubmit={submitAddComment}>
+          <div>
+            작성자 :
+            <textarea
+              value={writer}
+              onChange={(e) => onChangeWriter(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            댓글 :
+            <textarea
+              value={comment}
+              onChange={(e) => onChangeComment(e.target.value)}
+              required
+            />
+          </div>
+          <Button type="submit">추가</Button>
+        </CommentsEdit>
+      </CommentsWrapper>
+    </CommentsContainer>
   );
 };
 
 export default Comments;
+
+const CommentsContainer = styled.div`
+  /* padding: 20px 0; */
+`;
+
+const CommentsTitle = styled.div`
+  font-size: 20px;
+  padding: 20px;
+`;
+
+const CommentsWrapper = styled.div`
+  border-top: 1px solid #cecece;
+`;
+
+const CommentsBox = styled.div`
+  /* width: 90%; */
+  height: 80px;
+  position: relative;
+  color: black;
+  background-color: #e4e4e4;
+  border-radius: 10px;
+  margin: 30px;
+  padding: 20px;
+`;
+
+const CommentsContents = styled.div`
+  font-size: 20px;
+  margin: 10px 0;
+`;
+
+const CommentsBtnBox = styled.div`
+  position: absolute;
+  bottom: 35%;
+  right: 2%;
+`;
+
+const CommentsEdit = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+`;

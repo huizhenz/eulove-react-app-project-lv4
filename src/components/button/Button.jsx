@@ -9,28 +9,28 @@ export default Button;
 
 const StButton = styled.button`
   @font-face {
-    font-family: "SeoulNamsanM";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff")
+    font-family: "SpoqaHanSansNeo-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff")
       format("woff");
     font-weight: normal;
     font-style: normal;
   }
 
-  font-family: "SeoulNamsanM";
-  width: 50px;
-  /* height: 25px; */
-  color: #525252;
+  font-family: "SpoqaHanSansNeo-Regular";
+  width: 60px;
+  color: #000000;
   font-size: 16px;
   font-weight: 600;
-  background-color: #e8e7b1;
+  background-color: #e4e398;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px;
+  margin-left: 15px;
 
   &:hover {
-    color: #525252;
-    background-color: #bfbd88;
+    color: #000000;
+    background-color: #b4b166;
     border: none;
     transition: all ease 0.15s 0s;
   }
