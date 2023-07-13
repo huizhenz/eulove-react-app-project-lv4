@@ -1,17 +1,28 @@
 import React from "react";
-import List from "../components/list/List";
 import { styled } from "styled-components";
-import mapImg from "../img/europeMap.png";
+import grayMapImg from "../assets/grayMap.png";
+import CountryList from "../components/country/CountryList";
 
 const Main = () => {
   return (
     <>
-      <MapImg src={mapImg} />
-      <List />
+      <ImgContainer>
+        <MapImg src={grayMapImg} />
+        <CountryList />
+      </ImgContainer>
     </>
   );
 };
 
 export default Main;
 
-const MapImg = styled.img``;
+const ImgContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MapImg = styled.img`
+  width: 1150px;
+`;

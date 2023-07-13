@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { getDetailPost, updatePost } from "../../axios/api";
 import useInput from "../../hooks/useInput";
 import Category from "../category/Category";
+import Button from "../button/Button";
 
 const Post = () => {
   const { id } = useParams();
@@ -68,14 +69,10 @@ const Post = () => {
 
   return (
     <div style={{ border: "1px solid black", margin: "10px", padding: "10px" }}>
-      <Link to="/">
-        <button>되돌아가기</button>
-      </Link>
-      <br />
       {isEditMode ? (
-        <button onClick={clickUpdatePost}>저장</button>
+        <Button onClickEvent={clickUpdatePost}>저장</Button>
       ) : (
-        <button onClick={clickEditMode}>수정</button>
+        <Button onClickEvent={clickEditMode}>수정</Button>
       )}
       <div>
         작성자 :

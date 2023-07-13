@@ -1,7 +1,7 @@
 import React from "react";
 
 const Category = ({ onChangeCategory }) => {
-  const categories = ["교통", "숙소", "맛집", "쇼핑", "관광"];
+  const categories = ["전체", "교통", "숙소", "맛집", "쇼핑", "관광"];
 
   return (
     <select onChange={(e) => onChangeCategory(e.target.value)}>

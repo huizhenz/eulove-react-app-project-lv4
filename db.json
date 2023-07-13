@@ -1,62 +1,37 @@
 {
   "posts": [
     {
-      "id": "fH5kYeuNg",
-      "category": "교통",
-      "writer": "ㄴㅇㄹ",
-      "title": "ㄴㄹ",
-      "contents": "ㄹㄹ"
+      "id": "n0lqlOeqH",
+      "country": "France",
+      "category": "관광",
+      "writer": "ggg",
+      "title": "ggg",
+      "contents": "sdfsdfsdf"
     },
     {
-      "id": "uyQMf9FFF",
-      "category": "쇼핑",
-      "writer": "ㅎㄴㅇㅎ",
+      "id": "JJLqqLah9",
+      "country": "U.K",
+      "category": "관광",
+      "writer": "dfgdfg",
+      "title": "dfggg",
+      "contents": "ggg"
+    },
+    {
+      "id": "0AwoeE_Ql",
+      "country": "France",
+      "category": "관광",
+      "writer": "ㅎㅎ",
       "title": "ㄴㅇㄹ",
-      "contents": "ㅎㅎㅎ"
+      "contents": "ㄴㅇㄹㄹ"
+    },
+    {
+      "id": "idc67erhR",
+      "country": "France",
+      "category": "맛집",
+      "writer": "오",
+      "title": "즈겁다",
+      "contents": "화이ㅣㅌ"
     }
   ],
-  "comments": [
-    {
-      "id": "QZ9frh7IB",
-      "postId": "fH5kYeuNg",
-      "writer": "sdf",
-      "contents": "dsfsfdsf"
-    },
-    {
-      "id": "Lmvxl5e7W",
-      "postId": "fH5kYeuNg",
-      "writer": "dfgdfg",
-      "contents": "dfgf"
-    },
-    {
-      "id": "sJpJcQEa4",
-      "postId": "fH5kYeuNg",
-      "writer": "sdf",
-      "contents": "dsfsfdsf"
-    },
-    {
-      "id": "l8RVrIPx5",
-      "postId": "fH5kYeuNg",
-      "writer": "1111",
-      "contents": "dsfs2222"
-    },
-    {
-      "id": "ZfHUNHqQf",
-      "postId": "uyQMf9FFF",
-      "writer": "11fffg",
-      "contents": "11fffgg"
-    },
-    {
-      "id": "n1Vo7hap_",
-      "postId": "uyQMf9FFF",
-      "writer": "33",
-      "contents": "33"
-    },
-    {
-      "id": "mVSGc0dUQ",
-      "postId": "uyQMf9FFF",
-      "writer": "gg11",
-      "contents": "ggg11"
-    }
-  ]
+  "comments": []
 }

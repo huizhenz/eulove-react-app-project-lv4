@@ -9,6 +9,7 @@ import {
 import useInput from "../../hooks/useInput";
 import shortid from "shortid";
 import { useParams } from "react-router-dom";
+import Button from "../button/Button";
 
 const Comments = () => {
   const params = useParams();
@@ -114,7 +115,7 @@ const Comments = () => {
           onChange={(e) => onChangeComment(e.target.value)}
           required
         />
-        <button type="submit">추가</button>
+        <Button type="submit">추가</Button>
       </form>
       <div
         style={{ border: "1px solid black", padding: "10px", margin: "10px" }}
@@ -155,17 +156,17 @@ const Comments = () => {
                   )}
                 </div>
                 {isEditMode ? (
-                  <button onClick={() => clickUpdateComment(comment)}>
+                  <Button onClickEvent={() => clickUpdateComment(comment)}>
                     저장
-                  </button>
+                  </Button>
                 ) : (
-                  <button onClick={() => clickEditComment(comment)}>
+                  <Button onClickEvent={() => clickEditComment(comment)}>
                     수정
-                  </button>
+                  </Button>
                 )}
-                <button onClick={() => clickDeleteComment(comment.id)}>
+                <Button onClickEvent={() => clickDeleteComment(comment.id)}>
                   삭제
-                </button>
+                </Button>
               </div>
             );
           })}

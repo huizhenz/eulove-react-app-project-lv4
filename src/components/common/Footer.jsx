@@ -1,11 +1,23 @@
 import React from "react";
+import { styled } from "styled-components";
 
 const Footer = () => {
   return (
-    <div style={{ border: "1px solid black", margin: "10px", padding: "10px" }}>
-      Footer
-    </div>
+    <FooterBox>
+      <FooterContent>creator : 나ㅇㅂ, 장혜진, 조ㅅㄹ </FooterContent>
+    </FooterBox>
   );
 };
 
 export default Footer;
+
+const FooterBox = styled.div`
+  border-top: 1px solid #ffffff;
+  margin-top: 100px;
+`;
+
+const FooterContent = styled.div`
+  font-size: 18px;
+  text-align: center;
+  padding: 70px 0;
+`;
