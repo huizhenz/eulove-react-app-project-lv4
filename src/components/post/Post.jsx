@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDetailPost, deletePost, updatePost } from "../../axios/api";
 import useInput from "../../hooks/useInput";
 import Category from "../category/Category";
@@ -9,6 +9,7 @@ import { styled } from "styled-components";
 
 const Post = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { isLoading, isError, data } = useQuery("post", () =>
     getDetailPost(id)
@@ -45,10 +46,11 @@ const Post = () => {
     onChangeContents(data.contents);
   };
 
-  const clickDeletePost = (id) => {
+  const clickDeletePost = (data) => {
     if (window.confirm("정말 삭제하시겠습니까 ?")) {
       alert("삭제되었습니다.");
-      deleteMutation.mutate(id);
+      deleteMutation.mutate(data.id);
+      navigate(-1);
     } else {
       alert("삭제가 취소되었습니다.");
     }
@@ -134,7 +136,7 @@ const Post = () => {
         ) : (
           <PostBtnBox>
             <Button onClickEvent={clickEditMode}>수정</Button>
-            <Button onClickEvent={() => clickDeletePost(data.id)}>삭제</Button>
+            <Button onClickEvent={() => clickDeletePost(data)}>삭제</Button>
           </PostBtnBox>
         )}
       </PostWrapper>

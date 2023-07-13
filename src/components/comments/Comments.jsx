@@ -141,25 +141,27 @@ const Comments = () => {
               </CommentsBox>
             );
           })}
-        <CommentsEdit onSubmit={submitAddComment}>
+        <CommentsEditForm onSubmit={submitAddComment}>
           <div>
-            작성자 :
-            <textarea
+            <TextareaWriter
               value={writer}
               onChange={(e) => onChangeWriter(e.target.value)}
+              placeholder="작성자"
               required
             />
           </div>
           <div>
-            댓글 :
-            <textarea
+            <TextareaContents
               value={comment}
               onChange={(e) => onChangeComment(e.target.value)}
+              placeholder="댓글을 입력해 주세요"
               required
             />
           </div>
-          <Button type="submit">추가</Button>
-        </CommentsEdit>
+          <CommentsEditBtnBox>
+            <Button type="submit">추가</Button>
+          </CommentsEditBtnBox>
+        </CommentsEditForm>
       </CommentsWrapper>
     </CommentsContainer>
   );
@@ -202,9 +204,37 @@ const CommentsBtnBox = styled.div`
   right: 2%;
 `;
 
-const CommentsEdit = styled.form`
-  display: flex;
+const CommentsEditForm = styled.form`
+  position: relative;
+  border-top: 1px dashed #cecece;
+  /* display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+  align-items: center; */
+`;
+
+const TextareaWriter = styled.input`
+  width: 330px;
+  height: 30px;
+  font-size: 20px;
+  /* background-color: #e4e4e4; */
+  border-radius: 10px;
+  padding: 10px;
+  margin: 50px 30px 0px 30px;
+`;
+
+const TextareaContents = styled.textarea`
+  width: 94%;
+  height: 90px;
+  font-size: 20px;
+  /* background-color: #e4e4e4; */
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 30px;
+`;
+
+const CommentsEditBtnBox = styled.div`
+  position: absolute;
+  bottom: -15%;
+  right: 2%;
 `;
