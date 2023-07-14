@@ -44,11 +44,16 @@ export const ListWrapper = styled.div`
 export const ListBox = styled.div`
   position: relative;
   width: 85%;
+  height: 180px;
   color: black;
   background-color: #e7e7e7;
   border-radius: 5px;
   padding: 20px 25px;
   margin: 30px 0;
+`;
+
+export const PostBox = styled.div`
+  margin-right: 60px;
 `;
 
 export const PostCategory = styled.div`

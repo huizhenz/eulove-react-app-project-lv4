@@ -95,10 +95,12 @@ const List = ({ country, img }) => {
         {filteredList.map((post) => {
           return (
             <S.ListBox key={post.id}>
-              <S.PostCategory>{post.category}</S.PostCategory>
-              <S.PostTitle>{post.title}</S.PostTitle>
-              <S.PostContents>{post.contents}</S.PostContents>
-              <S.PostContents>by. {post.writer}</S.PostContents>
+              <S.PostBox>
+                <S.PostCategory>{post.category}</S.PostCategory>
+                <S.PostTitle>{post.title}</S.PostTitle>
+                <S.PostContents>{post.contents}</S.PostContents>
+                <S.PostContents>by. {post.writer}</S.PostContents>
+              </S.PostBox>
               <S.PostBtn>
                 <Button onClickEvent={() => clickToDetail(post.id)}>
                   상세
