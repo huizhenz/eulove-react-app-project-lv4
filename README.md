@@ -54,22 +54,24 @@
 
 <img src="https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white" />
 
-
 > Development
 
-<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/>   <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white"/>
+<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white"/> <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />
 
 > Deployment
 
 <img src="https://img.shields.io/badge/glitch-%233333FF.svg?style=for-the-badge&logo=glitch&logoColor=white" /> <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white"/> 
 
-## 3. API 명세
+## 3. API 명세서
 >
 
-## 4. 트러블 이슈
-1. 이미지 폴더
-2. API 명세 작성하는 거 잘
-
+## 4. 트러블 슈팅
+1. 이미지들이 모여있는 assets 폴더를 public 폴더 안에 넣고 import 하고싶었는데 잘 안됨 => 결국 해결하지 못하고 assets 폴더는 src 폴더 내부에 있음
+2. 댓글 수정시 댓글이 수정되긴하는데 렌더링되고 댓글을 useQuery로 조회할 시 수정된 댓글이 아닌 이전 댓글을 가져옴 => useQuery의 query key 값이 고유하지 않아서 생기는 문제였음 => 고유한 key 값으로 바꿔주니 해결됨
+3. json-server 배포 어려웠음 => glitch로 배포하기 성공하긴 했지만 과정이 어려웠음
+4. API 명세서 작성하는 거 잘 모르겠음 => 일단 작성하긴 했지만 여전히 잘 이해가지 않음
+ 
 ## 5. 추가하고 싶은 기능
 1. 회원가입 / 로그인 / 로그아웃
 2. 글 작성시 이미지파일 업로드
+3. 다양한 애니메이션 효과
