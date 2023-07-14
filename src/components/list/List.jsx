@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getPosts } from "../../axios/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Input from "../input/Input";
 import useInput from "../../hooks/useInput";
 import { styled } from "styled-components";
@@ -14,7 +14,6 @@ import { LiaLandmarkSolid } from "react-icons/lia";
 import Button from "../button/Button";
 
 const List = ({ country, img }) => {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const { isLoading, isError, data } = useQuery("posts", getPosts);
@@ -59,7 +58,24 @@ const List = ({ country, img }) => {
   return (
     <ListContainer>
       <ListTitle img={img}>{country}</ListTitle>
-      <button onClick={clickOpenModal}>글쓰기</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          width="medium"
+          backgroundcolor="white"
+          borderladius="round"
+          hoverback="dark"
+          onClickEvent={clickOpenModal}
+        >
+          글쓰기
+        </Button>
+      </div>
+
       {isOpenModal && (
         <Input country={country} clickOpenModal={clickOpenModal} />
       )}

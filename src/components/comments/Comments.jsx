@@ -30,7 +30,6 @@ const Comments = () => {
   const updateMutation = useMutation(updateComment, {
     onSuccess: () => {
       queryClient.invalidateQueries("comments");
-      console.log("댓글 수정 성공");
     },
   });
 
@@ -57,6 +56,8 @@ const Comments = () => {
 
     resetWriter("");
     resetComment("");
+
+    alert("댓글이 등록되었습니다.");
   };
 
   // 댓글 삭제
@@ -116,7 +117,7 @@ const Comments = () => {
                 </div>
                 <CommentsContents>
                   {isEditMode ? (
-                    <textarea
+                    <EditTextareaContents
                       value={editedContents}
                       onChange={(e) => onChangeEditedContents(e.target.value)}
                     />
@@ -141,7 +142,7 @@ const Comments = () => {
               </CommentsBox>
             );
           })}
-        <CommentsEditForm onSubmit={submitAddComment}>
+        <AddCommentsForm onSubmit={submitAddComment}>
           <div>
             <TextareaWriter
               value={writer}
@@ -159,9 +160,9 @@ const Comments = () => {
             />
           </div>
           <CommentsEditBtnBox>
-            <Button type="submit">추가</Button>
+            <Button type="submit">등록</Button>
           </CommentsEditBtnBox>
-        </CommentsEditForm>
+        </AddCommentsForm>
       </CommentsWrapper>
     </CommentsContainer>
   );
@@ -204,37 +205,40 @@ const CommentsBtnBox = styled.div`
   right: 2%;
 `;
 
-const CommentsEditForm = styled.form`
+const EditTextareaContents = styled.textarea`
+  width: 85%;
+  height: 40px;
+  font-size: 17px;
+  padding: 5px;
+`;
+
+const AddCommentsForm = styled.form`
   position: relative;
-  border-top: 1px dashed #cecece;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+  background-color: #67676757;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 80px;
 `;
 
 const TextareaWriter = styled.input`
   width: 330px;
-  height: 30px;
-  font-size: 20px;
-  /* background-color: #e4e4e4; */
+  height: 24px;
+  font-size: 18px;
   border-radius: 10px;
-  padding: 10px;
-  margin: 50px 30px 0px 30px;
+  padding: 7px;
+  margin-bottom: 10px;
 `;
 
 const TextareaContents = styled.textarea`
-  width: 94%;
+  width: 98%;
   height: 90px;
-  font-size: 20px;
-  /* background-color: #e4e4e4; */
+  font-size: 18px;
   border-radius: 10px;
-  padding: 10px;
-  margin: 10px 30px;
+  padding: 7px;
 `;
 
 const CommentsEditBtnBox = styled.div`
   position: absolute;
-  bottom: -15%;
+  top: 8%;
   right: 2%;
 `;

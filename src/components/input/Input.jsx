@@ -18,7 +18,6 @@ const Input = ({ country, clickOpenModal }) => {
   const mutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries("posts"); // 무효화 시켜서 새로고침 하지 않아도 바로 추가됨
-      console.log("추가 성공");
     },
   });
 
@@ -51,43 +50,36 @@ const Input = ({ country, clickOpenModal }) => {
 
   return (
     <ModalContainer>
-      <ModalWrapper>
-        <ModalBox onSubmit={onSubmitAddPostHandler}>
-          <div>
-            Category : <Category onChangeCategory={onChangeCategory} />
-          </div>
-          <div>
-            Writer :
-            <textarea
-              value={writer}
-              onChange={(e) => onChangeWriter(e.target.value)}
-              placeholder="작성자 입력 ..."
-              required
-            />
-          </div>
-          <div>
-            Title :
-            <textarea
-              value={title}
-              onChange={(e) => onChangeTitle(e.target.value)}
-              placeholder="제목 입력 ..."
-              required
-            />
-          </div>
-          <div>
-            Contents :
-            <textarea
-              value={contents}
-              onChange={(e) => onChangeContents(e.target.value)}
-              placeholder="내용 입력 ..."
-              required
-            />
-          </div>
-          <ModalBtnBox>
-            <Button type="submit">등록</Button>
-            <Button onClickEvent={clickOpenModal}>닫기</Button>
-          </ModalBtnBox>
-        </ModalBox>
+      <ModalWrapper onSubmit={onSubmitAddPostHandler}>
+        <ModalCategory>
+          <ModalLabel>Category&nbsp;</ModalLabel>
+          <Category onChangeCategory={onChangeCategory} />
+        </ModalCategory>
+        <ModalLabel>Writer</ModalLabel>
+        <ModalWriter
+          value={writer}
+          onChange={(e) => onChangeWriter(e.target.value)}
+          placeholder="작성자"
+          required
+        />
+        <ModalLabel>Title</ModalLabel>
+        <ModalTitle
+          value={title}
+          onChange={(e) => onChangeTitle(e.target.value)}
+          placeholder="제목을 입력해 주세요"
+          required
+        />
+        <ModalLabel>Contents</ModalLabel>
+        <ModalContents
+          value={contents}
+          onChange={(e) => onChangeContents(e.target.value)}
+          placeholder="내용을 입력해 주세요"
+          required
+        />
+        <ModalBtnBox>
+          <Button type="submit">등록</Button>
+          <Button onClickEvent={clickOpenModal}>닫기</Button>
+        </ModalBtnBox>
       </ModalWrapper>
     </ModalContainer>
   );
@@ -108,40 +100,51 @@ const ModalContainer = styled.div`
   z-index: 1;
 `;
 
-const ModalWrapper = styled.div`
+const ModalWrapper = styled.form`
   width: 600px;
   height: 400px;
-  /* 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column; */
-
-  /* text-align: left; */
-
+  align-items: left;
+  justify-content: left;
+  flex-direction: column;
   color: #000000;
   font-size: 18px;
   background-color: #e7e7e7;
   border-radius: 10px;
+  padding: 20px;
 `;
 
-const ModalBox = styled.form`
-  /* width: 600px;
-  height: 400px; */
+const ModalCategory = styled.div`
+  margin-top: 20px;
+`;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+const ModalLabel = styled.label`
+  font-weight: 600;
+  margin-top: 20px;
+`;
 
-  /* text-align: left; */
+const ModalWriter = styled.input`
+  width: 300px;
+  height: 14px;
+  font-size: 16px;
+  padding: 7px;
+`;
 
-  /* color: #000000;
-  font-size: 18px;
-  background-color: #e7e7e7;
-  border-radius: 10px; */
+const ModalTitle = styled.textarea`
+  width: 580px;
+  height: 23px;
+  font-size: 16px;
+  padding: 7px;
+`;
+
+const ModalContents = styled.textarea`
+  width: 580px;
+  height: 100px;
+  font-size: 16px;
+  padding: 7px;
 `;
 
 const ModalBtnBox = styled.div`
+  text-align: center;
   margin: 20px 0;
 `;

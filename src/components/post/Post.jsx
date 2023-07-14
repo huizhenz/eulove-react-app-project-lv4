@@ -21,14 +21,12 @@ const Post = () => {
     // onSuccess는 useMutation의 option 중 하나
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
-      console.log("삭제 성공");
     },
   });
 
   const updateMutation = useMutation(updatePost, {
     onSuccess: () => {
       queryClient.invalidateQueries("post");
-      console.log("수정 성공");
     },
   });
 
@@ -41,7 +39,7 @@ const Post = () => {
   const clickEditMode = () => {
     setIsEditMode((prev) => !prev);
     onChangeWriter(data.writer);
-    // onChangeCategory(data.category);
+    onChangeCategory(data.category);
     onChangeTitle(data.title);
     onChangeContents(data.contents);
   };
@@ -104,7 +102,7 @@ const Post = () => {
           {isEditMode ? (
             <>
               Title : &nbsp;
-              <textarea
+              <TextareaTitle
                 value={title}
                 onChange={(e) => onChangeTitle(e.target.value)}
               />
@@ -117,8 +115,8 @@ const Post = () => {
         <PostContents>
           {isEditMode ? (
             <>
-              Contents : &nbsp;
-              <textarea
+              <p>Contents : </p>
+              <TextareaContents
                 value={contents}
                 onChange={(e) => onChangeContents(e.target.value)}
               />
@@ -131,14 +129,16 @@ const Post = () => {
           by.&nbsp;
           <span>{data.writer}</span>
         </PostWriter>
-        {isEditMode ? (
-          <Button onClickEvent={clickUpdatePost}>저장</Button>
-        ) : (
-          <PostBtnBox>
-            <Button onClickEvent={clickEditMode}>수정</Button>
-            <Button onClickEvent={() => clickDeletePost(data)}>삭제</Button>
-          </PostBtnBox>
-        )}
+        <PostBtnBox>
+          {isEditMode ? (
+            <Button onClickEvent={clickUpdatePost}>저장</Button>
+          ) : (
+            <>
+              <Button onClickEvent={clickEditMode}>수정</Button>
+              <Button onClickEvent={() => clickDeletePost(data)}>삭제</Button>
+            </>
+          )}
+        </PostBtnBox>
       </PostWrapper>
     </PostContainer>
   );
@@ -187,6 +187,18 @@ const PostWriter = styled.div`
   left: 4%;
   font-size: 18px;
   margin: 10px 0;
+`;
+
+const TextareaTitle = styled.textarea`
+  width: 500px;
+  height: 24px;
+  font-size: 18px;
+`;
+
+const TextareaContents = styled.textarea`
+  width: 1020px;
+  height: 130px;
+  font-size: 18px;
 `;
 
 const PostBtnBox = styled.div`
