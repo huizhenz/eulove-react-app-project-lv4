@@ -63,7 +63,9 @@
 <img src="https://img.shields.io/badge/glitch-%233333FF.svg?style=for-the-badge&logo=glitch&logoColor=white" /> <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white"/> 
 
 ## 3. API 명세서
->
+> https://huizhenz.notion.site/API-0d5b6c86beea4c08a730ab34a7c4e2ff?pvs=4
+> ![8cfb686a-daa6-41f5-ac79-1e470d1ed9b6](https://github.com/huizhenz/eulove-react-app-project-lv4/assets/133093192/7dab8eec-5d1d-4145-af1e-0dbe31e72768)
+
 
 ## 4. 트러블 슈팅
 1. 이미지들이 모여있는 assets 폴더를 public 폴더 안에 넣고 import 하고싶었는데 잘 안됨 => 결국 해결하지 못하고 assets 폴더는 src 폴더 내부에 있음
