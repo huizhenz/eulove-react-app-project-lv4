@@ -4,7 +4,6 @@ import { getPosts } from "../../axios/api";
 import { useNavigate } from "react-router-dom";
 import Input from "../input/Input";
 import useInput from "../../hooks/useInput";
-import { styled } from "styled-components";
 import { PiListMagnifyingGlassBold } from "react-icons/pi";
 import { BiBus } from "react-icons/bi";
 import { PiHouseLineBold } from "react-icons/pi";
@@ -12,6 +11,7 @@ import { PiForkKnifeDuotone } from "react-icons/pi";
 import { TbShoppingBag } from "react-icons/tb";
 import { LiaLandmarkSolid } from "react-icons/lia";
 import Button from "../button/Button";
+import * as S from "./StyledList";
 
 const List = ({ country, img }) => {
   const navigate = useNavigate();
@@ -56,8 +56,8 @@ const List = ({ country, img }) => {
   }
 
   return (
-    <ListContainer>
-      <ListTitle img={img}>{country}</ListTitle>
+    <S.ListContainer>
+      <S.ListTitle img={img}>{country}</S.ListTitle>
       <div
         style={{
           display: "flex",
@@ -79,119 +79,37 @@ const List = ({ country, img }) => {
       {isOpenModal && (
         <Input country={country} clickOpenModal={clickOpenModal} />
       )}
-      <ListCategory>
+      <S.ListCategory>
         {categories.map((option) => {
           return (
-            <CategoryIcon
+            <S.CategoryIcon
               key={option}
               onClick={() => onChangeSelectedCategory(option.category)}
             >
               {option.icon}
-            </CategoryIcon>
+            </S.CategoryIcon>
           );
         })}
-      </ListCategory>
-      <ListWrapper>
+      </S.ListCategory>
+      <S.ListWrapper>
         {filteredList.map((post) => {
           return (
-            <ListBox key={post.id}>
-              <PostCategory>{post.category}</PostCategory>
-              <PostTitle>{post.title}</PostTitle>
-              <PostContents>{post.contents}</PostContents>
-              <PostContents>by. {post.writer}</PostContents>
-              <PostBtn>
+            <S.ListBox key={post.id}>
+              <S.PostCategory>{post.category}</S.PostCategory>
+              <S.PostTitle>{post.title}</S.PostTitle>
+              <S.PostContents>{post.contents}</S.PostContents>
+              <S.PostContents>by. {post.writer}</S.PostContents>
+              <S.PostBtn>
                 <Button onClickEvent={() => clickToDetail(post.id)}>
                   상세
                 </Button>
-              </PostBtn>
-            </ListBox>
+              </S.PostBtn>
+            </S.ListBox>
           );
         })}
-      </ListWrapper>
-    </ListContainer>
+      </S.ListWrapper>
+    </S.ListContainer>
   );
 };
 
 export default List;
-
-const ListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ListTitle = styled.div`
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: ${({ img }) => `url(${img})`};
-  background-size: cover;
-  background-position: center;
-  /* border-radius: 5px; */
-  font-size: 58px;
-  font-weight: 600;
-  font-style: italic;
-  text-shadow: 3px 3px 3px #000000;
-  margin: 40px 0px 60px 0px;
-`;
-
-const ListCategory = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #cecece;
-  margin: 40px 0px;
-`;
-
-const CategoryIcon = styled.div`
-  padding: 40px 30px;
-  cursor: pointer;
-`;
-
-const ListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ListBox = styled.div`
-  position: relative;
-  width: 85%;
-  color: black;
-  background-color: #e7e7e7;
-  border-radius: 5px;
-  padding: 20px 25px;
-  margin: 30px 0;
-`;
-
-const PostCategory = styled.div`
-  width: 60px;
-  text-align: center;
-  border: 3px solid #383838;
-  border-radius: 10px;
-  font-size: 20px;
-  margin: 3px;
-`;
-
-const PostTitle = styled.div`
-  font-size: 24px;
-  font-weight: 600;
-  margin: 10px 5px;
-`;
-
-const PostContents = styled.div`
-  font-size: 18px;
-  margin: 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-
-const PostBtn = styled.div`
-  position: absolute;
-  bottom: 40%;
-  right: 2%;
-`;

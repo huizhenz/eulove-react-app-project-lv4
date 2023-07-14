@@ -4,8 +4,8 @@ import { addPost } from "../../axios/api";
 import { useMutation, useQueryClient } from "react-query";
 import useInput from "../../hooks/useInput";
 import Category from "../category/Category";
-import { styled } from "styled-components";
 import Button from "../button/Button";
+import * as S from "./StyledInput";
 
 const Input = ({ country, clickOpenModal }) => {
   const [category, onChangeCategory] = useInput();
@@ -49,102 +49,40 @@ const Input = ({ country, clickOpenModal }) => {
   };
 
   return (
-    <ModalContainer>
-      <ModalWrapper onSubmit={onSubmitAddPostHandler}>
-        <ModalCategory>
-          <ModalLabel>Category&nbsp;</ModalLabel>
+    <S.ModalContainer>
+      <S.ModalWrapper onSubmit={onSubmitAddPostHandler}>
+        <S.ModalCategory>
+          <S.ModalLabel>Category&nbsp;</S.ModalLabel>
           <Category onChangeCategory={onChangeCategory} />
-        </ModalCategory>
-        <ModalLabel>Writer</ModalLabel>
-        <ModalWriter
+        </S.ModalCategory>
+        <S.ModalLabel>Writer</S.ModalLabel>
+        <S.ModalWriter
           value={writer}
           onChange={(e) => onChangeWriter(e.target.value)}
           placeholder="작성자"
           required
         />
-        <ModalLabel>Title</ModalLabel>
-        <ModalTitle
+        <S.ModalLabel>Title</S.ModalLabel>
+        <S.ModalTitle
           value={title}
           onChange={(e) => onChangeTitle(e.target.value)}
           placeholder="제목을 입력해 주세요"
           required
         />
-        <ModalLabel>Contents</ModalLabel>
-        <ModalContents
+        <S.ModalLabel>Contents</S.ModalLabel>
+        <S.ModalContents
           value={contents}
           onChange={(e) => onChangeContents(e.target.value)}
           placeholder="내용을 입력해 주세요"
           required
         />
-        <ModalBtnBox>
+        <S.ModalBtnBox>
           <Button type="submit">등록</Button>
           <Button onClickEvent={clickOpenModal}>닫기</Button>
-        </ModalBtnBox>
-      </ModalWrapper>
-    </ModalContainer>
+        </S.ModalBtnBox>
+      </S.ModalWrapper>
+    </S.ModalContainer>
   );
 };
 
 export default Input;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #3434346e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-`;
-
-const ModalWrapper = styled.form`
-  width: 600px;
-  height: 400px;
-  display: flex;
-  align-items: left;
-  justify-content: left;
-  flex-direction: column;
-  color: #000000;
-  font-size: 18px;
-  background-color: #e7e7e7;
-  border-radius: 10px;
-  padding: 20px;
-`;
-
-const ModalCategory = styled.div`
-  margin-top: 20px;
-`;
-
-const ModalLabel = styled.label`
-  font-weight: 600;
-  margin-top: 20px;
-`;
-
-const ModalWriter = styled.input`
-  width: 300px;
-  height: 14px;
-  font-size: 16px;
-  padding: 7px;
-`;
-
-const ModalTitle = styled.textarea`
-  width: 580px;
-  height: 23px;
-  font-size: 16px;
-  padding: 7px;
-`;
-
-const ModalContents = styled.textarea`
-  width: 580px;
-  height: 100px;
-  font-size: 16px;
-  padding: 7px;
-`;
-
-const ModalBtnBox = styled.div`
-  text-align: center;
-  margin: 20px 0;
-`;

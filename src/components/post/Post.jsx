@@ -5,7 +5,7 @@ import { getDetailPost, deletePost, updatePost } from "../../axios/api";
 import useInput from "../../hooks/useInput";
 import Category from "../category/Category";
 import Button from "../button/Button";
-import { styled } from "styled-components";
+import * as S from "./StyledPost";
 
 const Post = () => {
   const { id } = useParams();
@@ -87,9 +87,9 @@ const Post = () => {
   }
 
   return (
-    <PostContainer>
-      <PostWrapper>
-        <PostCategory>
+    <S.PostContainer>
+      <S.PostWrapper>
+        <S.PostCategory>
           {isEditMode ? (
             <>
               Category : &nbsp; <Category onChangeCategory={onChangeCategory} />
@@ -97,12 +97,12 @@ const Post = () => {
           ) : (
             <span>{data.category}</span>
           )}
-        </PostCategory>
-        <PostTitle>
+        </S.PostCategory>
+        <S.PostTitle>
           {isEditMode ? (
             <>
               Title : &nbsp;
-              <TextareaTitle
+              <S.TextareaTitle
                 value={title}
                 onChange={(e) => onChangeTitle(e.target.value)}
               />
@@ -110,13 +110,13 @@ const Post = () => {
           ) : (
             <span>{data.title}</span>
           )}
-        </PostTitle>
+        </S.PostTitle>
 
-        <PostContents>
+        <S.PostContents>
           {isEditMode ? (
             <>
               <p>Contents : </p>
-              <TextareaContents
+              <S.TextareaContents
                 value={contents}
                 onChange={(e) => onChangeContents(e.target.value)}
               />
@@ -124,12 +124,12 @@ const Post = () => {
           ) : (
             <span>{data.contents} </span>
           )}
-        </PostContents>
-        <PostWriter>
+        </S.PostContents>
+        <S.PostWriter>
           by.&nbsp;
           <span>{data.writer}</span>
-        </PostWriter>
-        <PostBtnBox>
+        </S.PostWriter>
+        <S.PostBtnBox>
           {isEditMode ? (
             <Button onClickEvent={clickUpdatePost}>저장</Button>
           ) : (
@@ -138,71 +138,10 @@ const Post = () => {
               <Button onClickEvent={() => clickDeletePost(data)}>삭제</Button>
             </>
           )}
-        </PostBtnBox>
-      </PostWrapper>
-    </PostContainer>
+        </S.PostBtnBox>
+      </S.PostWrapper>
+    </S.PostContainer>
   );
 };
 
 export default Post;
-
-const PostContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const PostWrapper = styled.div`
-  position: relative;
-  width: 80%;
-  height: 400px;
-  color: #000000;
-  background-color: #e4e4e4;
-  border-radius: 10px;
-  margin: 50px 0;
-  padding: 30px;
-`;
-
-const PostCategory = styled.div`
-  font-size: 20px;
-  padding-left: 5px;
-`;
-
-const PostTitle = styled.div`
-  font-size: 30px;
-  font-weight: 600;
-  border-bottom: 1px solid #000000;
-  padding: 10px 0;
-  margin: 10px 0;
-`;
-
-const PostContents = styled.div`
-  font-size: 22px;
-  margin-top: 30px;
-`;
-
-const PostWriter = styled.div`
-  position: absolute;
-  bottom: 5%;
-  left: 4%;
-  font-size: 18px;
-  margin: 10px 0;
-`;
-
-const TextareaTitle = styled.textarea`
-  width: 500px;
-  height: 24px;
-  font-size: 18px;
-`;
-
-const TextareaContents = styled.textarea`
-  width: 1020px;
-  height: 130px;
-  font-size: 18px;
-`;
-
-const PostBtnBox = styled.div`
-  position: absolute;
-  bottom: 5%;
-  right: 3%;
-`;
