@@ -10,6 +10,7 @@ import { PiHouseLineBold } from "react-icons/pi";
 import { PiForkKnifeDuotone } from "react-icons/pi";
 import { TbShoppingBag } from "react-icons/tb";
 import { LiaLandmarkSolid } from "react-icons/lia";
+import LoadingImg from "../../assets/loading.gif";
 import Button from "../button/Button";
 import * as S from "./StyledList";
 
@@ -48,7 +49,12 @@ const List = ({ country, img }) => {
   const clickToDetail = (id) => navigate(`/detail/${id}`);
 
   if (isLoading) {
-    return <h1>로딩중입니다 ...</h1>;
+    return (
+      <S.LoadingBox>
+        <h2>잠시만 기다려주세요</h2>
+        <img src={LoadingImg} />
+      </S.LoadingBox>
+    );
   }
 
   if (isError) {

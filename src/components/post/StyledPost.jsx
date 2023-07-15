@@ -1,5 +1,17 @@
 import { styled } from "styled-components";
 
+export const LoadingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+`;
+
+export const MoveBtnBox = styled.div`
+  text-align: right;
+`;
+
 export const PostContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -13,7 +25,7 @@ export const PostWrapper = styled.div`
   color: #000000;
   background-color: #e4e4e4;
   border-radius: 10px;
-  margin: 50px 0;
+  margin: 20px 0 50px 0;
   padding: 30px;
 `;
 

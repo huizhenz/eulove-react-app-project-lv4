@@ -5,6 +5,7 @@ import { getDetailPost, deletePost, updatePost } from "../../axios/api";
 import useInput from "../../hooks/useInput";
 import Category from "../category/Category";
 import Button from "../button/Button";
+import LoadingImg from "../../assets/loading.gif";
 import * as S from "./StyledPost";
 
 const Post = () => {
@@ -78,8 +79,15 @@ const Post = () => {
     setIsEditMode((prev) => !prev);
   };
 
+  const clickToList = () => navigate(-1);
+
   if (isLoading) {
-    return <h1>로딩중입니다 ...</h1>;
+    return (
+      <S.LoadingBox>
+        <h2>잠시만 기다려주세요</h2>
+        <img src={LoadingImg} />
+      </S.LoadingBox>
+    );
   }
 
   if (isError) {
@@ -87,60 +95,73 @@ const Post = () => {
   }
 
   return (
-    <S.PostContainer>
-      <S.PostWrapper>
-        <S.PostCategory>
-          {isEditMode ? (
-            <>
-              Category : &nbsp; <Category onChangeCategory={onChangeCategory} />
-            </>
-          ) : (
-            <span>{data.category}</span>
-          )}
-        </S.PostCategory>
-        <S.PostTitle>
-          {isEditMode ? (
-            <>
-              Title : &nbsp;
-              <S.TextareaTitle
-                value={title}
-                onChange={(e) => onChangeTitle(e.target.value)}
-              />
-            </>
-          ) : (
-            <span>{data.title}</span>
-          )}
-        </S.PostTitle>
+    <>
+      <S.MoveBtnBox>
+        <Button
+          width="medium"
+          backgroundcolor="white"
+          hoverback="dark"
+          onClickEvent={clickToList}
+        >
+          이전 페이지
+        </Button>
+      </S.MoveBtnBox>
+      <S.PostContainer>
+        <S.PostWrapper>
+          <S.PostCategory>
+            {isEditMode ? (
+              <>
+                Category : &nbsp;
+                <Category onChangeCategory={onChangeCategory} />
+              </>
+            ) : (
+              <span>{data.category}</span>
+            )}
+          </S.PostCategory>
+          <S.PostTitle>
+            {isEditMode ? (
+              <>
+                Title : &nbsp;
+                <S.TextareaTitle
+                  value={title}
+                  onChange={(e) => onChangeTitle(e.target.value)}
+                />
+              </>
+            ) : (
+              <span>{data.title}</span>
+            )}
+          </S.PostTitle>
 
-        <S.PostContents>
-          {isEditMode ? (
-            <>
-              <p>Contents : </p>
-              <S.TextareaContents
-                value={contents}
-                onChange={(e) => onChangeContents(e.target.value)}
-              />
-            </>
-          ) : (
-            <span>{data.contents} </span>
-          )}
-        </S.PostContents>
-        <S.PostWriter>
-          by.&nbsp;
-          <span>{data.writer}</span>
-        </S.PostWriter>
-        <S.PostBtnBox>
-          {isEditMode ? (
-            <Button onClickEvent={clickUpdatePost}>저장</Button>
-          ) : (
-            <>
-              <Button onClickEvent={clickEditMode}>수정</Button>
-              <Button onClickEvent={() => clickDeletePost(data)}>삭제</Button>
-            </>
-          )}
-        </S.PostBtnBox>
-      </S.PostWrapper>
-    </S.PostContainer>
+          <S.PostContents>
+            {isEditMode ? (
+              <>
+                <p>Contents : </p>
+                <S.TextareaContents
+                  value={contents}
+                  onChange={(e) => onChangeContents(e.target.value)}
+                />
+              </>
+            ) : (
+              <span>{data.contents} </span>
+            )}
+          </S.PostContents>
+          <S.PostWriter>
+            by.&nbsp;
+            <span>{data.writer}</span>
+          </S.PostWriter>
+          <S.PostBtnBox>
+            {isEditMode ? (
+              <Button onClickEvent={clickUpdatePost}>저장</Button>
+            ) : (
+              <>
+                <Button onClickEvent={clickEditMode}>수정</Button>
+                <Button onClickEvent={() => clickDeletePost(data)}>삭제</Button>
+              </>
+            )}
+          </S.PostBtnBox>
+        </S.PostWrapper>
+      </S.PostContainer>
+    </>
   );
 };
 

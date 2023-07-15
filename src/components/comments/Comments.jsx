@@ -10,6 +10,7 @@ import useInput from "../../hooks/useInput";
 import shortid from "shortid";
 import { useParams } from "react-router-dom";
 import Button from "../button/Button";
+import LoadingImg from "../../assets/loading.gif";
 import * as S from "./StyledComments";
 
 const Comments = () => {
@@ -95,7 +96,7 @@ const Comments = () => {
   };
 
   if (isLoading) {
-    return <h1>로딩중입니다 ...</h1>;
+    return <></>;
   }
 
   if (isError) {

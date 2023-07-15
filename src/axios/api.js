@@ -61,7 +61,6 @@ const updateComment = async (comment) => {
 
 export {
   getPosts,
-  // getCountryPosts,
   getDetailPost,
   addPost,
   deletePost,

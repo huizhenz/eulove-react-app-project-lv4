@@ -33,7 +33,7 @@ const StButton = styled.button`
   }
 
   font-family: "SpoqaHanSansNeo-Regular";
-  width: ${(props) => (props.width === "medium" ? "200px" : "60px")};
+  width: ${(props) => (props.width === "medium" ? "150px" : "60px")};
   color: #000000;
   font-size: 16px;
   font-weight: 600;
